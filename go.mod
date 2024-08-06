@@ -1,0 +1,3 @@
+module TETRIS-OPTIMIZER
+
+go 1.18
