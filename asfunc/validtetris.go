@@ -8,6 +8,10 @@ import (
 )
 
 func Collect(filename string) (bool, []string) {
+	if !strings.HasSuffix(filename, ".txt") {
+		return false, []string{}
+	}
+
 	file, _ := os.Open(filename)
 
 	defer file.Close()

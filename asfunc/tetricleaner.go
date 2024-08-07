@@ -4,84 +4,54 @@ import (
 	"strings"
 )
 
-// Function to clean rows and columns with no '#'
-func Clean(m []string) []string {
-	var cleaned []string
 
-	for _, line := range m {
-		cleaned = append(cleaned, cleans(line))
+// Function to clean each chunk using the janitor function
+func Cleaner(tetri []string) []string {
+	var cleanedtetri []string
+	for _, chunk := range tetri {
+		cleanedtetri = append(cleanedtetri, janitor(chunk))
 	}
-	return cleaned
+	return cleanedtetri
 }
 
-// Function to clean a single tetrimino
-func cleans(m string) string {
-	mytetr := strings.Split(m, "\n")
-	var mytetti [][]string
-	for _, line := range mytetr {
-		mytetti = append(mytetti, strings.Split(line, ""))
-	}
+// Function to clean a single chunk
+func janitor(chunk string) string {
+	lines := strings.Split(chunk, "\n")
+	var validLines [][]string
+	columnHasHash := make(map[int]bool)
 
-	// Remove empty rows
-	var cleanedRows [][]string
-	// columns to print
-	var columnSet []int
-	for _, row := range mytetti {
+	// Split each line into characters and collect valid lines and columns to remove
+	for _, line := range lines {
+		chars := strings.Split(line, "")
 		hasHash := false
-		for j, char := range row {
+		for j, char := range chars {
 			if char == "#" {
 				hasHash = true
-				columnSet = append(columnSet, j)
-				break
+				columnHasHash[j] = true
 			}
 		}
 		if hasHash {
-			cleanedRows = append(cleanedRows, row)
+			validLines = append(validLines, chars)
 		}
 	}
-	// Transpose to remove empty columns
-	transposit := transpose(cleanedRows)
 
-	// Remove empty columns
-	var cleanedCols [][]string
-	for _, col := range transposit {
-		hasHash := false
-		for _, char := range col {
-			if char == "#" {
-				hasHash = true
-				break
+	// Remove columns without any hash
+	var cleanedLines [][]string
+	for _, line := range validLines {
+		var cleanedLine []string
+		for j, char := range line {
+			if columnHasHash[j] {
+				cleanedLine = append(cleanedLine, char)
 			}
 		}
-		if hasHash {
-			cleanedCols = append(cleanedCols, col)
-		}
+		cleanedLines = append(cleanedLines, cleanedLine)
 	}
 
-	// Transpose back to original orientation
-	cleaned := transpose(cleanedCols)
-
-	// // Convert cleaned 2D slice back to string
+	// Convert cleaned 2D slice back to string
 	var result []string
-	for _, row := range cleaned {
-		result = append(result, strings.Join(row, ""))
+	for _, line := range cleanedLines {
+		result = append(result, strings.Join(line, ""))
 	}
 
 	return strings.Join(result, "\n")
-}
-
-// Function to transpose a 2D slice of strings
-func transpose(m [][]string) [][]string {
-	numRow := len(m)
-	numCol := len(m[0])
-
-	transp := make([][]string, numCol) // Note the change: numCol instead of numRow
-	for i := range transp {
-		transp[i] = make([]string, numRow)
-	}
-	for i := 0; i < numRow; i++ {
-		for j := 0; j < numCol; j++ {
-			transp[j][i] = m[i][j]
-		}
-	}
-	return transp
 }

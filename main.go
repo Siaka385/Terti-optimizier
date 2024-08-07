@@ -26,7 +26,7 @@ func main() {
 				os.Exit(1)
 			}
 		}
-		tetri = asfunc.Clean(tetri)
+		tetri = asfunc.Cleaner(tetri)
 		asfunc.Proo(tetri, len(tetri))
 	} else {
 		fmt.Println("ERROR")
