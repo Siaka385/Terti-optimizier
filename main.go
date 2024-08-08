@@ -7,9 +7,13 @@ import (
 	"TETRIS-OPTIMIZER/asfunc"
 )
 
-func main() {
-	//start := time.Now()
+/**
+ * main is the entry point of the program.
+ * It collects the input arguments, validates them, and performs Tetris-related operations.
+ * If any errors occur during the process, it prints "ERROR" and exits with status code 1.
+ */
 
+func main() {
 	myargs := os.Args[1:]
 	if len(myargs) != 1 {
 		fmt.Println("ERROR")
@@ -33,9 +37,4 @@ func main() {
 		fmt.Println("ERROR")
 		os.Exit(1)
 	}
-
-	//stop := time.Since(start)
-
-	//fmt.Println("Result:", start)
-	//fmt.Println("Execution time:", stop)
 }

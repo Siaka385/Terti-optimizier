@@ -7,6 +7,14 @@ import (
 	"strings"
 )
 
+/**
+ * Collect scans a text file containing Tetris shapes and collects them into a slice of strings.
+ * It reads the file line by line, ensuring each Tetris shape is separated by an empty line.
+ * The function returns a boolean indicating success and the collected Tetris shapes as a slice of strings.
+ *
+ * @param filename The name of the text file to collect Tetris shapes from.
+ * @return A boolean indicating the success of collecting Tetris shapes and a slice of strings containing the shapes.
+ */
 func Collect(filename string) (bool, []string) {
 	if !strings.HasSuffix(filename, ".txt") {
 		return false, []string{}
@@ -52,6 +60,12 @@ func Collect(filename string) (bool, []string) {
 	}
 	return true, mytetris
 }
+
+/**
+ * IsconnectedAtJoints checks if the given tetris shape is connected at joints.
+ * It verifies the shape's dimensions, connectivity, and the number of '#' symbols.
+ * Returns true if the shape is valid, false otherwise.
+ */
 
 func IsconnectedAtJoints(m string) bool {
 	mystring := strings.Split(m, "\n")
