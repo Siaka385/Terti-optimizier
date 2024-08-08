@@ -12,7 +12,11 @@ func Collect(filename string) (bool, []string) {
 		return false, []string{}
 	}
 
-	file, _ := os.Open(filename)
+	file, err := os.Open(filename)
+	if err != nil {
+		fmt.Println("ERROR")
+		os.Exit(1)
+	}
 
 	defer file.Close()
 
@@ -50,7 +54,6 @@ func Collect(filename string) (bool, []string) {
 }
 
 func IsconnectedAtJoints(m string) bool {
-
 	mystring := strings.Split(m, "\n")
 	if len(mystring) != 4 {
 		return false
