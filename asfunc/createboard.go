@@ -114,17 +114,3 @@ func Proo(tetri []string, m int) {
 	stop := time.Since(start)
 	fmt.Println("Time elapsed:", stop)
 }
-
-// Here’s an optimized version of your code, with some improvements for readability and efficiency:
-
-//     Reduced Recalculations: The original code recalculates some values repeatedly. I’ve minimized this by calculating these values once where possible.
-//     Removed Unnecessary Recursion: The Proo function recursively calls itself if all pieces aren’t placed. This can be made more efficient by iterating over the board size directly.
-//     Reduced String Splitting: Splitting the tetrimino strings repeatedly was inefficient. I moved the splitting to the beginning to avoid redundant operations.
-
-// 	Key Improvements:
-
-//     Minimized Redundant Operations: The tetrimino strings are split once and stored, avoiding repetitive string operations.
-//     Efficient Board Resizing: The resizing of the board is done iteratively, increasing the board size only if necessary.
-//     Improved Time Logging: The time taken is logged after all operations are complete, providing a clearer picture of the total runtime.
-
-// This should improve the efficiency and readability of your code while maintaining the same functionality.
