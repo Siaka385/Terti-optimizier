@@ -50,6 +50,7 @@ func Collect(filename string) (bool, []string) {
 }
 
 func IsconnectedAtJoints(m string) bool {
+
 	mystring := strings.Split(m, "\n")
 	if len(mystring) != 4 {
 		return false

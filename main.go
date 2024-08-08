@@ -3,13 +3,12 @@ package main
 import (
 	"fmt"
 	"os"
-	"time"
 
 	"TETRIS-OPTIMIZER/asfunc"
 )
 
 func main() {
-	start := time.Now()
+	//start := time.Now()
 
 	myargs := os.Args[1:]
 	if len(myargs) != 1 {
@@ -26,15 +25,17 @@ func main() {
 				os.Exit(1)
 			}
 		}
+
 		tetri = asfunc.Cleaner(tetri)
+
 		asfunc.Proo(tetri, len(tetri))
 	} else {
 		fmt.Println("ERROR")
 		os.Exit(1)
 	}
 
-	stop := time.Since(start)
+	//stop := time.Since(start)
 
-	fmt.Println("Result:", start)
-	fmt.Println("Execution time:", stop)
+	//fmt.Println("Result:", start)
+	//fmt.Println("Execution time:", stop)
 }

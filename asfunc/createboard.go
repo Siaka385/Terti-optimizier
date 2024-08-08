@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"strings"
+	"time"
 )
 
 func CalculateBoardSize(m int) [][]string {
@@ -85,6 +86,7 @@ func PrintBoard(board [][]string) {
 }
 
 func Proo(teti []string, m int) {
+	start := time.Now()
 	bord := CalculateBoardSize(m)
 
 	if PlaceAllTertimino(bord, teti, 0) {
@@ -93,4 +95,44 @@ func Proo(teti []string, m int) {
 	} else {
 		Proo(teti, m+1)
 	}
+	stop := time.Since(start)
+	fmt.Println("start pro: ", start)
+	fmt.Println("stop pro: ", stop)
 }
+
+// func Proo(teti []string, m int) {
+//     start := time.Now()
+//     bord := CalculateBoardSize(m)
+
+//     // Try all permutations of the tetrimino pieces
+//     if tryAllPermutations(bord, teti, 0) {
+//         fmt.Println("All Tetrimino pieces placed successfully:")
+//         PrintBoard(bord)
+//     } else {
+//         Proo(teti, m+1)
+//     }
+
+//     stop := time.Since(start)
+//     fmt.Println("start pro: ", start)
+//     fmt.Println("stop pro: ", stop)
+// }
+
+// func tryAllPermutations(board [][]string, tetri []string, index int) bool {
+//     if index == len(tetri) {
+//         return PlaceAllTertimino(board, tetri, 0)
+//     }
+
+//     for i := index; i < len(tetri); i++ {
+//         // Swap tetri[index] and tetri[i]
+//         tetri[index], tetri[i] = tetri[i], tetri[index]
+
+//         if tryAllPermutations(board, tetri, index+1) {
+//             return true
+//         }
+
+//         // Swap back
+//         tetri[index], tetri[i] = tetri[i], tetri[index]
+//     }
+
+//     return false
+// }
